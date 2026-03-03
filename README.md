@@ -11,13 +11,6 @@ An implementation of Tacotron speech synthesis in TensorFlow.
     * The second set was trained by [@MXGray](https://github.com/MXGray) for 140K steps on the [Nancy Corpus](http://www.cstr.ed.ac.uk/projects/blizzard/2011/lessac_blizzard2011/).
 
 
-### Recent Updates
-
-1. @npuichigo [fixed](https://github.com/keithito/Tacotron/pull/205) a bug where dropout was not being applied in the prenet.
-
-2. @begeekmyfriend created a [fork](https://github.com/begeekmyfriend/Tacotron) that adds location-sensitive attention and the stop token from the [Tacotron 2](https://arxiv.org/abs/1712.05884) paper. This can greatly reduce the amount of data required to train a model.
-
-
 ## Background
 
 In April 2017, Google published a paper, [Tacotron: Towards End-to-End Speech Synthesis](https://arxiv.org/pdf/1703.10135.pdf),
