@@ -173,7 +173,3 @@ Pull requests are welcome!
   * Here is the expected loss curve when training on LJ Speech with the default hyperparameters:
     ![Loss curve](https://user-images.githubusercontent.com/1945356/36077599-c0513e4a-0f21-11e8-8525-07347847720c.png)
 
-
-## Other Implementations
-  * By Alex Barron: https://github.com/barronalex/Fullhouse-TTS
-  * By Kyubyong Park: https://github.com/Kyubyong/Fullhouse-TTS
