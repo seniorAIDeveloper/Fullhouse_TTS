@@ -1,6 +1,6 @@
 # Fullhouse-TTS
 
-An implementation of Fullhouse-TTS speech synthesis in TensorFlow.
+An implementation of Tacotron speech synthesis in TensorFlow.
 
 
 ### Audio Samples
@@ -13,9 +13,9 @@ An implementation of Fullhouse-TTS speech synthesis in TensorFlow.
 
 ### Recent Updates
 
-1. @npuichigo [fixed](https://github.com/keithito/Fullhouse-TTS/pull/205) a bug where dropout was not being applied in the prenet.
+1. @npuichigo [fixed](https://github.com/keithito/Tacotron/pull/205) a bug where dropout was not being applied in the prenet.
 
-2. @begeekmyfriend created a [fork](https://github.com/begeekmyfriend/Fullhouse-TTS) that adds location-sensitive attention and the stop token from the [Fullhouse-TTS 2](https://arxiv.org/abs/1712.05884) paper. This can greatly reduce the amount of data required to train a model.
+2. @begeekmyfriend created a [fork](https://github.com/begeekmyfriend/Tacotron) that adds location-sensitive attention and the stop token from the [Tacotron 2](https://arxiv.org/abs/1712.05884) paper. This can greatly reduce the amount of data required to train a model.
 
 
 ## Background
@@ -49,12 +49,12 @@ Pull requests are welcome!
 
 1. **Download and unpack a model**:
    ```
-   curl https://data.keithito.com/data/speech/Fullhouse-TTS-20180906.tar.gz | tar xzC /tmp
+   curl https://data.keithito.com/data/speech/Tacotron-20180906.tar.gz | tar xzC /tmp
    ```
 
 2. **Run the demo server**:
    ```
-   python3 demo_server.py --checkpoint /tmp/Fullhouse-TTS-20180906/model.ckpt
+   python3 demo_server.py --checkpoint /tmp/Tacotron-20180906/model.ckpt
    ```
 
 3. **Point your browser at localhost:9000**
@@ -75,11 +75,11 @@ Pull requests are welcome!
    You can use other datasets if you convert them to the right format. See [TRAINING_DATA.md](TRAINING_DATA.md) for more info.
 
 
-2. **Unpack the dataset into `~/Fullhouse-TTS`**
+2. **Unpack the dataset into `~/Tacotron`**
 
    After unpacking, your tree should look like this for LJ Speech:
    ```
-   Fullhouse-TTS
+   Tacotron
      |- LJSpeech-1.1
          |- metadata.csv
          |- wavs
@@ -87,7 +87,7 @@ Pull requests are welcome!
 
    or like this for Blizzard 2012:
    ```
-   Fullhouse-TTS
+   Tacotron
      |- Blizzard2012
          |- ATrampAbroad
          |   |- sentence_index.txt
@@ -119,21 +119,21 @@ Pull requests are welcome!
 
 5. **Monitor with Tensorboard** (optional)
    ```
-   tensorboard --logdir ~/Fullhouse-TTS/logs-Fullhouse-TTS
+   tensorboard --logdir ~/Tacotron/logs-Tacotron
    ```
 
    The trainer dumps audio and alignments every 1000 steps. You can find these in
-   `~/Fullhouse-TTS/logs-Fullhouse-TTS`.
+   `~/Tacotron/logs-Tacotron`.
 
 6. **Synthesize from a checkpoint**
    ```
-   python3 demo_server.py --checkpoint ~/Fullhouse-TTS/logs-Fullhouse-TTS/model.ckpt-185000
+   python3 demo_server.py --checkpoint ~/Tacotron/logs-Tacotron/model.ckpt-185000
    ```
    Replace "185000" with the checkpoint number that you want to use, then open a browser
    to `localhost:9000` and type what you want to speak. Alternately, you can
    run [eval.py](eval.py) at the command line:
    ```
-   python3 eval.py --checkpoint ~/Fullhouse-TTS/logs-Fullhouse-TTS/model.ckpt-185000
+   python3 eval.py --checkpoint ~/Tacotron/logs-Tacotron/model.ckpt-185000
    ```
    If you set the `--hparams` flag when training, set the same value here.
 
@@ -146,7 +146,7 @@ Pull requests are welcome!
     you can get around 1.1 sec/step on a GTX 1080Ti.
 
   * You can train with [CMUDict](http://www.speech.cs.cmu.edu/cgi-bin/cmudict) by downloading the
-    dictionary to ~/Fullhouse-TTS/training and then passing the flag `--hparams="use_cmudict=True"` to
+    dictionary to ~/Tacotron/training and then passing the flag `--hparams="use_cmudict=True"` to
     train.py. This will allow you to pass ARPAbet phonemes enclosed in curly braces at eval
     time to force a particular pronunciation, e.g. `Turn left on {HH AW1 S S T AH0 N} Street.`
 
@@ -157,7 +157,7 @@ Pull requests are welcome!
     alignments will no longer make sense). Although it will recover eventually, it may
     save time to restart at a checkpoint prior to the spike by passing the
     `--restore_step=150000` flag to train.py (replacing 150000 with a step number prior to the
-    spike). **Update**: a recent [fix](https://github.com/keithito/Fullhouse-TTS/pull/7) to gradient
+    spike). **Update**: a recent [fix](https://github.com/keithito/Tacotron/pull/7) to gradient
     clipping by @candlewill may have fixed this.
     
   * During eval and training, audio length is limited to `max_iters * outputs_per_step * frame_shift_ms`
